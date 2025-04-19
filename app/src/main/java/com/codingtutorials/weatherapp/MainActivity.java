@@ -2,6 +2,7 @@ package com.codingtutorials.weatherapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView weatherIcon;
     private Button refreshButton;
     private EditText cityNameInput;
-    private static final String API_KEY = "effebe0badd5d381a1fc85ffb3b2740d";
+    private static final String API_KEY = "06792c2914acead33ebd5549c5c90c79";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,20 @@ public class MainActivity extends AppCompatActivity {
         weatherIcon = findViewById(R.id.weatherIcon);
         refreshButton  = findViewById(R.id.fetchWeatherButton);
         cityNameInput = findViewById(R.id.cityNameInput);
+
+        Button forecast10DayButton = findViewById(R.id.WeatherButtonDescription);
+        forecast10DayButton.setOnClickListener(view -> {
+            String cityName = cityNameInput.getText().toString();
+            if (!cityName.isEmpty()) {
+                Intent intent = new Intent(MainActivity.this, TenDayForecastActivity.class);
+                intent.putExtra("city_name", cityName); // ⬅️ передаём название города
+                startActivity(intent);
+            } else {
+                cityNameInput.setError("Введите название города");
+            }
+        });
+
+
 
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,11 +90,12 @@ public class MainActivity extends AppCompatActivity {
                         runOnUiThread(() -> updateUI(result));
                     } catch (IOException e)
                     {
-                        e.printStackTrace();;
+                        e.printStackTrace();
                     }
                 }
            );
     }
+
 
     private void updateUI(String result)
     {

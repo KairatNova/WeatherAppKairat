@@ -177,6 +177,17 @@
         android:textSize="22sp"
         />
 
+    <Button
+        android:id="@+id/WeatherButtonDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cityNameInput"
+        android:layout_marginTop="63dp"
+        android:backgroundTint="#2B3A67"
+        android:fontFamily="@font/urbanist"
+        android:text="Погода за 10 дней"
+        android:textColor="#FFF"
+        android:textSize="22sp" />
 
 
 </RelativeLayout>
